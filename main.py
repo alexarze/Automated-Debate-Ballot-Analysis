@@ -77,7 +77,7 @@ BALLOT = dict(
             },
 )
 
-currentBallot = "ballot1"
+currentBallot = "ballot"
 prelimRounds = 0
 prelimRoundsCountdown = 0
 ynAnswer = 0
