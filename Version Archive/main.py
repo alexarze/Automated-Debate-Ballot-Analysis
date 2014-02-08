@@ -5,7 +5,6 @@ import sys
 BALLOT = dict(
     ballot1 = {
         'vote':0,
-        'side':"",
         'first':"",
         'second':"",
         'third':"",
@@ -18,7 +17,6 @@ BALLOT = dict(
 
     ballot2 = {
         'vote':0,
-        'side':"",
         'first':"",
         'second':"",
         'third':"",
@@ -31,7 +29,6 @@ BALLOT = dict(
     
     ballot3 = {
         'vote':0,
-        'side':"",
         'first':"",
         'second':"",
         'third':"",
@@ -44,7 +41,6 @@ BALLOT = dict(
     
     ballot4 = {
         'vote':0,
-        'side':"",
         'first':"",
         'second':"",
         'third':"",
@@ -57,7 +53,6 @@ BALLOT = dict(
     
     ballot5 = {
         'vote':0,
-        'side':"",
         'first':"",
         'second':"",
         'third':"",
@@ -70,7 +65,6 @@ BALLOT = dict(
     
     ballot6 = {
         'vote':0,
-        'side':"",
         'first':"",
         'second':"",
         'third':"",
@@ -173,7 +167,6 @@ while prelimRoundsCountdown > 0:
         print("1A SPEAKER\n")
         BALLOT[currentBallot]['1a']['name'] = raw_input("Name: ")
         ynAnswer = checkYNAnswer(raw_input("Are you sure: Y or N? "))
-    ynAnswer = 0
     while complete == 0:
         BALLOT[currentBallot]['1a']['persuasiveness'] = raw_input("Persuasiveness: ")
         complete = isComplete(BALLOT[currentBallot]['1a']['persuasiveness'])
@@ -315,43 +308,6 @@ while prelimRoundsCountdown > 0:
         BALLOT[currentBallot]['2n']['refutation'] = raw_input("Refutation: ")
         complete = isComplete(BALLOT[currentBallot]['2n']['refutation'])
     complete = 0
-    
-    while complete == 0:
-        ynAnswer = raw_input("Did you go Affirmative: Y or N? ")
-        if ynAnswer.lower() == "y":
-            BALLOT[currentBallot]['side'] = "aff"
-            complete = 1
-        elif ynAnswer.lower() == "n":
-            BALLOT[currentBallot]['side'] = "neg"
-            complete = 1
-        elif ynAnswer.lower() == "q":
-            sys.exit("Force quit enacted!")
-        else:
-            print("Invalid answer!")
-            complete = 0
-    
-    complete = 0
-    
-    while complete == 0:
-        ynAnswer = raw_input("Did your team win: Y or N? ")
-        if ynAnswer.lower() == "y":
-            complete = 1
-            if BALLOT[currentBallot]['side'] == "aff":
-                BALLOT[currentBallot]['vote'] = 1
-            else:
-                BALLOT[currentBallot]['vote'] = 0
-        elif ynAnswer.lower() == "n":
-            complete = 1
-            if BALLOT[currentBallot]['side'] == "aff":
-                BALLOT[currentBallot]['vote'] = 0
-            else:
-                BALLOT[currentBallot]['vote'] = 1
-        elif ynAnswer.lower() == "q":
-            sys.exit("Force quit enacted!")
-        else:
-            print("Invalid answer!")
-            complete = 0
-    
     BALLOT[currentBallot]['2n']['total'] = BALLOT[currentBallot]['2n']['persuasiveness']+BALLOT[currentBallot]['2n']['organization']+BALLOT[currentBallot]['2n']['delivery']+BALLOT[currentBallot]['2n']['evidence']+BALLOT[currentBallot]['2n']['crossex']+BALLOT[currentBallot]['2n']['refutation']
     
     ynAnswer = 0
