@@ -4,7 +4,7 @@ import sys
 #Begin Variable Definitions
 BALLOT = dict(
     ballot1 = {
-        'win':0,
+        'vote':0,
         'side':"",
         'first':"",
         'second':"",
@@ -17,7 +17,7 @@ BALLOT = dict(
             },
 
     ballot2 = {
-        'win':0,
+        'vote':0,
         'side':"",
         'first':"",
         'second':"",
@@ -30,7 +30,7 @@ BALLOT = dict(
             },
     
     ballot3 = {
-        'win':0,
+        'vote':0,
         'side':"",
         'first':"",
         'second':"",
@@ -43,7 +43,7 @@ BALLOT = dict(
             },
     
     ballot4 = {
-        'win':0,
+        'vote':0,
         'side':"",
         'first':"",
         'second':"",
@@ -56,7 +56,7 @@ BALLOT = dict(
             },
     
     ballot5 = {
-        'win':0,
+        'vote':0,
         'side':"",
         'first':"",
         'second':"",
@@ -69,7 +69,7 @@ BALLOT = dict(
             },
     
     ballot6 = {
-        'win':0,
+        'vote':0,
         'side':"",
         'first':"",
         'second':"",
@@ -89,11 +89,6 @@ prelimRounds = 0
 prelimRoundsCountdown = 0
 ynAnswer = 0
 complete = 0
-winCount = 0
-winCountAff = 0
-winCountNeg = 0
-lossCount = 0
-tempWinLoss = ""
 #End Variable Definitions
 
 #Begin Function Definitions
@@ -203,7 +198,7 @@ while prelimRoundsCountdown > 0:
         BALLOT[currentBallot]['1a']['refutation'] = raw_input("Refutation: ")
         complete = isComplete(BALLOT[currentBallot]['1a']['refutation'])
     complete = 0
-    BALLOT[currentBallot]['1a']['total'] = int(BALLOT[currentBallot]['1a']['persuasiveness'])+int(BALLOT[currentBallot]['1a']['organization'])+int(BALLOT[currentBallot]['1a']['delivery'])+int(BALLOT[currentBallot]['1a']['evidence'])+int(BALLOT[currentBallot]['1a']['crossex'])+int(BALLOT[currentBallot]['1a']['refutation'])
+    BALLOT[currentBallot]['1a']['total'] = BALLOT[currentBallot]['1a']['persuasiveness']+BALLOT[currentBallot]['1a']['organization']+BALLOT[currentBallot]['1a']['delivery']+BALLOT[currentBallot]['1a']['evidence']+BALLOT[currentBallot]['1a']['crossex']+BALLOT[currentBallot]['1a']['refutation']
     
     ynAnswer = 0
     
@@ -242,7 +237,7 @@ while prelimRoundsCountdown > 0:
         BALLOT[currentBallot]['2a']['refutation'] = raw_input("Refutation: ")
         complete = isComplete(BALLOT[currentBallot]['2a']['refutation'])
     complete = 0
-    BALLOT[currentBallot]['2a']['total'] = int(BALLOT[currentBallot]['2a']['persuasiveness'])+int(BALLOT[currentBallot]['2a']['organization'])+int(BALLOT[currentBallot]['2a']['delivery'])+int(BALLOT[currentBallot]['2a']['evidence'])+int(BALLOT[currentBallot]['2a']['crossex'])+int(BALLOT[currentBallot]['2a']['refutation'])
+    BALLOT[currentBallot]['2a']['total'] = BALLOT[currentBallot]['2a']['persuasiveness']+BALLOT[currentBallot]['2a']['organization']+BALLOT[currentBallot]['2a']['delivery']+BALLOT[currentBallot]['2a']['evidence']+BALLOT[currentBallot]['2a']['crossex']+BALLOT[currentBallot]['2a']['refutation']
     
     ynAnswer = 0
     
@@ -281,7 +276,7 @@ while prelimRoundsCountdown > 0:
         BALLOT[currentBallot]['1n']['refutation'] = raw_input("Refutation: ")
         complete = isComplete(BALLOT[currentBallot]['1n']['refutation'])
     complete = 0
-    BALLOT[currentBallot]['1n']['total'] = int(BALLOT[currentBallot]['1n']['persuasiveness'])+int(BALLOT[currentBallot]['1n']['organization'])+int(BALLOT[currentBallot]['1n']['delivery'])+int(BALLOT[currentBallot]['1n']['evidence'])+int(BALLOT[currentBallot]['1n']['crossex'])+int(BALLOT[currentBallot]['1n']['refutation'])
+    BALLOT[currentBallot]['1n']['total'] = BALLOT[currentBallot]['1n']['persuasiveness']+BALLOT[currentBallot]['1n']['organization']+BALLOT[currentBallot]['1n']['delivery']+BALLOT[currentBallot]['1n']['evidence']+BALLOT[currentBallot]['1n']['crossex']+BALLOT[currentBallot]['1n']['refutation']
     
     ynAnswer = 0
     
@@ -319,7 +314,6 @@ while prelimRoundsCountdown > 0:
     while complete == 0:
         BALLOT[currentBallot]['2n']['refutation'] = raw_input("Refutation: ")
         complete = isComplete(BALLOT[currentBallot]['2n']['refutation'])
-    
     complete = 0
     
     while complete == 0:
@@ -342,93 +336,29 @@ while prelimRoundsCountdown > 0:
         ynAnswer = raw_input("Did your team win: Y or N? ")
         if ynAnswer.lower() == "y":
             complete = 1
-            BALLOT[currentBallot]['win'] = 1
+            if BALLOT[currentBallot]['side'] == "aff":
+                BALLOT[currentBallot]['vote'] = 1
+            else:
+                BALLOT[currentBallot]['vote'] = 0
         elif ynAnswer.lower() == "n":
             complete = 1
-            BALLOT[currentBallot]['win'] = 0
+            if BALLOT[currentBallot]['side'] == "aff":
+                BALLOT[currentBallot]['vote'] = 0
+            else:
+                BALLOT[currentBallot]['vote'] = 1
         elif ynAnswer.lower() == "q":
             sys.exit("Force quit enacted!")
         else:
             print("Invalid answer!")
             complete = 0
     
-    BALLOT[currentBallot]['2n']['total'] = int(BALLOT[currentBallot]['2n']['persuasiveness'])+int(BALLOT[currentBallot]['2n']['organization'])+int(BALLOT[currentBallot]['2n']['delivery'])+int(BALLOT[currentBallot]['2n']['evidence'])+int(BALLOT[currentBallot]['2n']['crossex'])+int(BALLOT[currentBallot]['2n']['refutation'])
+    BALLOT[currentBallot]['2n']['total'] = BALLOT[currentBallot]['2n']['persuasiveness']+BALLOT[currentBallot]['2n']['organization']+BALLOT[currentBallot]['2n']['delivery']+BALLOT[currentBallot]['2n']['evidence']+BALLOT[currentBallot]['2n']['crossex']+BALLOT[currentBallot]['2n']['refutation']
     
     ynAnswer = 0
     
-    complete = 0
-    
     prelimRoundsCountdown -= 1
     
     currentBallotInt += 1
     currentBallotList[6] = str(currentBallotInt)
     currentBallot = "".join(currentBallotList)
 
-#Resetting prelimRoundsCountdown
-prelimRoundsCountdown = prelimRounds
-
-#Determining Goal
-os.system("clear")
-print("\n\nPlease determine what your goal for the tournament was.\n")
-os.system('read -s -n 1 -p "Press any key to continue..."')
-
-#Number of prelim rounds
-os.system("clear")
-print("\n\nThe number of preliminary rounds was:")
-print("\n" + str(prelimRounds) + "\n")
-os.system('read -s -n 1 -p "Press any key to continue..."')
-
-#Win-Loss Record
-os.system("clear")
-print("\n\nYour win-loss record was:\n")
-
-while prelimRoundsCountdown > 0:
-    currentBallotInt -= 1
-    currentBallotList[6] = str(currentBallotInt)
-    currentBallot = "".join(currentBallotList)
-    if BALLOT[currentBallot]['win'] == 1:
-        if BALLOT[currentBallot]['side'] == "aff":
-            winCountAff += 1
-        else:
-            winCountNeg += 1
-        winCount += 1
-    elif BALLOT[currentBallot]['win'] == 0:
-        lossCount += 1
-    else:
-        print("Somehow you managed to neither win nor lose.")
-    prelimRoundsCountdown -= 1
-
-print(str(winCount) + "-" + str(lossCount) + "\n")
-os.system('read -s -n 1 -p "Press any key to continue..."')
-
-#Resetting prelimRoundsCountdown
-prelimRoundsCountdown = prelimRounds
-
-#Win-Loss By Round
-os.system("clear")
-print("\n\nYour win-loss record by round was:\n")
-
-while prelimRoundsCountdown > 0:
-    if BALLOT[currentBallot]['win'] == 0:
-        tempWinLoss = "Loss"
-    else:
-        tempWinLoss = "Win"
-    print("Round " + str(currentBallotInt) + ": " + tempWinLoss)
-    currentBallotInt += 1
-    currentBallotList[6] = str(currentBallotInt)
-    currentBallot = "".join(currentBallotList)
-    prelimRoundsCountdown -= 1
-
-os.system('read -s -n 1 -p "\nPress any key to continue..."')
-
-#Number of AFF Wins
-os.system("clear")
-print("\n\nNumber of AFF wins:\n")
-print(winCountAff)
-os.system('read -s -n 1 -p "\nPress any key to continue..."')
-
-#Number of NEG Wins
-os.system("clear")
-print("\n\nNumber of NEG wins:\n")
-print(winCountNeg)
-os.system('read -s -n 1 -p "\nPress any key to continue..."')
