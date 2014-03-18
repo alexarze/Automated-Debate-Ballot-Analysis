@@ -82,34 +82,6 @@ BALLOT = dict(
             },
 )
 
-SPEAKER = dict(
-    speaker1 = {
-        'name':"",
-        'affPosition':"",
-        'negPosition':"",
-        'persuasivenessAverage':0,
-        'organizationAverage':0,
-        'deliveryAverage':0,
-        'evidenceAverage':0,
-        'crossexAverage':0,
-        'refutationAverage':0,
-        'totalAverage':0
-    },
-    
-    speaker2 = {
-        'name':"",
-        'affPosition':"",
-        'negPosition':"",
-        'persuasivenessAverage':0,
-        'organizationAverage':0,
-        'deliveryAverage':0,
-        'evidenceAverage':0,
-        'crossexAverage':0,
-        'refutationAverage':0,
-        'totalAverage':0
-    }
-)
-
 currentBallotList = list("ballot1")
 currentBallot = "ballot1"
 currentBallotInt = 1
@@ -122,7 +94,6 @@ winCountAff = 0
 winCountNeg = 0
 lossCount = 0
 tempWinLoss = ""
-tempInt = 0
 #End Variable Definitions
 
 #Begin Function Definitions
@@ -172,9 +143,9 @@ def checkInt(arg):
     
 #Introductory Message
 os.system("clear")
-print("\n\nThis program is designed to automate ballot analysis. This will require initial input of ballot information, but will hopefully end with saved time and effort and minimal keystrokes and math.\nPLEASE REMEMBER THAT THIS IS MEANT PURELY FOR PRELIMINARY ROUNDS. ANY BUGS OCCURRING WITH OUTROUNDS WILL BE DISREGARDED.\n\nAlso, please remember to stay consistent in naming the competitors on the ballot. This program searches the names of the ballots for you and your partner's names.")
+print("\n\nThis program is designed to automate ballot analysis. This will require initial input of ballot information, but will hopefully end with saved time and effort and minimal keystrokes and math.\nPLEASE REMEMBER THAT THIS IS MEANT PURELY FOR PRELIMINARY ROUNDS. ANY BUGS OCCURRING WITH OUTROUNDS WILL BE DISREGARDED.\n")
 #Press any key to continue...
-os.system('read -s -n 1 -p "\nPress any key to continue..."')
+os.system('read -s -n 1 -p "Press any key to continue..."')
 
 #Determine Number of Prelim Rounds
 while ynAnswer == 0:
@@ -450,9 +421,6 @@ while prelimRoundsCountdown > 0:
 
 os.system('read -s -n 1 -p "\nPress any key to continue..."')
 
-#Resetting prelimRoundsCountdown
-prelimRoundsCountdown = prelimRounds
-
 #Number of AFF Wins
 os.system("clear")
 print("\n\nNumber of AFF wins:\n")
@@ -464,65 +432,3 @@ os.system("clear")
 print("\n\nNumber of NEG wins:\n")
 print(winCountNeg)
 os.system('read -s -n 1 -p "\nPress any key to continue..."')
-
-#Average Speakerpoint Total
-os.system("clear")
-print("\n\nYou and your partner's speakerpoint total averages:\n")
-
-if BALLOT['ballot1']['side'] == "aff":
-    SPEAKER['speaker1']['name'] = BALLOT['ballot1']['1a']['name']
-    SPEAKER['speaker2']['name'] = BALLOT['ballot1']['2a']['name']
-    SPEAKER['speaker1']['affPosition'] = "1a"
-    SPEAKER['speaker2']['affPosition'] = "2a"
-    if BALLOT['ballot2']['1n']['name'] == SPEAKER['speaker1']['name']:
-        SPEAKER['speaker1']['negPosition'] = "1n"
-        SPEAKER['speaker2']['negPosition'] ="2n"
-    else:
-        SPEAKER['speaker1']['negPosition'] = "2n"
-        SPEAKER['speaker2']['negPosition'] = "1n"
-else:
-    SPEAKER['speaker1']['name'] = BALLOT['ballot1']['1n']['name']
-    SPEAKER['speaker2']['name'] = BALLOT['ballot1']['2n']['name']
-    SPEAKER['speaker1']['negPosition'] = "1n"
-    SPEAKER['speaker2']['negPosition'] = "2n"
-    if BALLOT['ballot2']['1a']['name'] == SPEAKER['speaker1']['name']:
-        SPEAKER['speaker1']['affPosition'] = "1a"
-        SPEAKER['speaker2']['affPosition'] = "2a"
-    else:
-        SPEAKER['speaker1']['affPosition'] = "2a"
-        SPEAKER['speaker2']['affPosition'] = "1a"
-
-    #Speaker 1 Total Average
-while prelimRoundsCountdown > 0:
-    currentBallotInt -= 1
-    currentBallotList[6] = str(currentBallotInt)
-    currentBallot = "".join(currentBallotList)
-    if BALLOT[currentBallot]['side'] == "aff":
-        tempInt += BALLOT[currentBallot][SPEAKER['speaker1']['affPosition']]['total']
-    else:
-        tempInt += BALLOT[currentBallot][SPEAKER['speaker1']['negPosition']]['total']
-    prelimRoundsCountdown -= 1
-SPEAKER['speaker1']['totalAverage'] = tempInt/prelimRounds
-
-    #Resetting variables
-prelimRoundsCountdown = prelimRounds
-tempInt = 0
-
-    #Speaker 2 Total Average
-while prelimRoundsCountdown > 0:
-    if BALLOT[currentBallot]['side'] == "aff":
-        tempInt += BALLOT[currentBallot][SPEAKER['speaker2']['affPosition']]['total']
-    else:
-        tempInt += BALLOT[currentBallot][SPEAKER['speaker2']['negPosition']]['total']
-    currentBallotInt += 1
-    currentBallotList[6] = str(currentBallotInt)
-    currentBallot = "".join(currentBallotList)
-    prelimRoundsCountdown -= 1
-SPEAKER['speaker2']['totalAverage'] = tempInt/prelimRounds
-
-    #Print Speaker Point Totals
-print(SPEAKER['speaker1']['name'] + ": " + str(SPEAKER['speaker1']['totalAverage']))
-print(SPEAKER['speaker2']['name'] + ": " + str(SPEAKER['speaker2']['totalAverage']))
-
-os.system('read -s -n 1 -p "\nPress any key to continue..."')
-
